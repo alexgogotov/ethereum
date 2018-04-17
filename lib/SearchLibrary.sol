@@ -5,16 +5,15 @@ pragma solidity ^0.4.16;
 library SimpleSearch {
 
     // Создаем функцию для просмотра массива
-    function searchFor(uint[] storage self, uint _value) returns (uint){
+    function searchFor(address[] storage _voterAccts, mapping (address => bool) _voters, address _voterAddress) returns (bool){
         // Проходимся по массиву
-        for (uint i = 0; i < self.length; i++){
+        for (uint i = 0; i < _voterAccts.length; i++){
 
-            // Если нашли число - возвращаем его индекс
-            if (self[i] == _value) return i;
+            // Если нашли адрес - возвращаем его значение из маппинга
+            if (_voterAccts[i] == _voterAddress) return _voters[_voterAddress];
 
         }
-        // Если не нашли число, возвращаем uint(-1)
-        return uint(-1);
+        // Если не нашли адрес, возвращаем ложь
+        return false;
     }
-
 }
